@@ -6,49 +6,46 @@ export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  async function RegisterUser(e) {
-    e.preventDefault();
+  async function registerUser(ev) {
+    ev.preventDefault();
     try {
-      await axios.post("/register", {
+      await axios.post("/api/register", {
         name,
         email,
         password,
       });
-      alert('Successfully registered');
+      alert("Registration successful. Now you can log in");
     } catch (e) {
-      alert("register failed");
-      console.log(e);
+      alert("Registration failed. Please try again later");
     }
-
   }
-  //TODO: 1:12:13
   return (
     <div className="flex items-center justify-around mt-4 grow">
-      <div className="mt-64">
+      <div className="mb-64">
         <h1 className="mb-4 text-4xl text-center">Register</h1>
-        <form className="max-w-md mx-auto" onSubmit={RegisterUser}>
+        <form className="max-w-md mx-auto" onSubmit={registerUser}>
           <input
             type="text"
             placeholder="John Doe"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(ev) => setName(ev.target.value)}
           />
           <input
             type="email"
             placeholder="your@email.com"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(ev) => setEmail(ev.target.value)}
           />
           <input
             type="password"
             placeholder="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(ev) => setPassword(ev.target.value)}
           />
           <button className="primary">Register</button>
           <div className="py-2 text-center text-gray-500">
             Already a member?{" "}
-            <Link to="/login" className="text-black underline">
+            <Link className="text-black underline" to={"/login"}>
               Login
             </Link>
           </div>
